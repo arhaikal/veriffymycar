@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src='https://cdn.veriff.me/sdk/js/veriff.min.js'></script>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link rel='stylesheet' href='https://cdn.veriff.me/sdk/js/styles.css'>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>
