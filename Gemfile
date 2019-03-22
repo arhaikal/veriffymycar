@@ -28,12 +28,13 @@ gem 'bcrypt', '~> 3.1.12'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'dotenv-rails'
-gem 'faraday'
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
+  gem 'pry', '~> 0.12.2'
 end
 
 group :development do

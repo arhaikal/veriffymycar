@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_215347) do
+ActiveRecord::Schema.define(version: 2019_03_22_195704) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "documents", force: :cascade do |t|
     t.string "number"
-    t.string "type"
+    t.string "document_type"
     t.string "country"
     t.date "valid_from"
     t.date "valid_until"
@@ -25,6 +27,16 @@ ActiveRecord::Schema.define(version: 2019_03_16_215347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "face"
+    t.string "document_front"
+    t.string "document_back"
+    t.bigint "document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_photos_on_document_id"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -66,7 +78,20 @@ ActiveRecord::Schema.define(version: 2019_03_16_215347) do
     t.index ["rental_id"], name: "index_vehicles_on_rental_id"
   end
 
+  create_table "verification_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "status"
+    t.bigint "user_id"
+    t.bigint "document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_verification_sessions_on_document_id"
+    t.index ["user_id"], name: "index_verification_sessions_on_user_id"
+  end
+
   add_foreign_key "documents", "users"
+  add_foreign_key "photos", "documents"
   add_foreign_key "rentals", "users"
   add_foreign_key "vehicles", "rentals"
+  add_foreign_key "verification_sessions", "documents"
+  add_foreign_key "verification_sessions", "users"
 end
