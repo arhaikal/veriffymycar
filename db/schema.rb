@@ -30,9 +30,18 @@ ActiveRecord::Schema.define(version: 2019_03_22_195704) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string "face"
-    t.string "document_front"
-    t.string "document_back"
+    t.string "face_file_name"
+    t.string "face_content_type"
+    t.integer "face_file_size"
+    t.datetime "face_updated_at"
+    t.string "document_front_file_name"
+    t.string "document_front_content_type"
+    t.integer "document_front_file_size"
+    t.datetime "document_front_updated_at"
+    t.string "document_back_file_name"
+    t.string "document_back_content_type"
+    t.integer "document_back_file_size"
+    t.datetime "document_back_updated_at"
     t.bigint "document_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
