@@ -29,7 +29,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'dotenv-rails'
 gem 'httparty'
-gem "paperclip", "~> 6.0.0"
+gem 'paperclip', '~> 6.0.0'
+gem 'bootstrap', '~> 4.3.1'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

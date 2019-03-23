@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+  <%= form_for @rental, url: { action: "create" } do |f| %>
+      <div class="row">
+        <div class="form-group">
+          <div class="form-row">
+            <%= f.text_field :pickup_location, class: "form-control", placeholder: "Pickup Location"%>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <%= f.datetime_field :pickup_date, class: "form-control", placeholder: "Pickup Date" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="form-row">
+            <%= f.text_field :dropoff_location, class: "form-control", placeholder: "Dropoff Location" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <%= f.datetime_field :dropoff_date, class: "form-control", placeholder: "Dropoff Date" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="form-row">
+            <%= f.select :vehicle_id, Vehicle.all.collect { |c| "#{c.make} #{c.model} #{c.year}" }%>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit "Find a Car", class: "btn btn-default btn-primary" %>  
+ <% end %>
+  </div>
+</div>

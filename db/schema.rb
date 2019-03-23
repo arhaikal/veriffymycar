@@ -50,11 +50,15 @@ ActiveRecord::Schema.define(version: 2019_03_22_195704) do
 
   create_table "rentals", force: :cascade do |t|
     t.date "pickup_date"
+    t.string "pickup_location"
     t.date "dropoff_date"
+    t.string "dropoff_location"
     t.bigint "user_id"
+    t.bigint "vehicle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_rentals_on_user_id"
+    t.index ["vehicle_id"], name: "index_rentals_on_vehicle_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,10 +85,8 @@ ActiveRecord::Schema.define(version: 2019_03_22_195704) do
     t.string "make"
     t.string "model"
     t.integer "year"
-    t.bigint "rental_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rental_id"], name: "index_vehicles_on_rental_id"
   end
 
   create_table "verification_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -100,7 +102,6 @@ ActiveRecord::Schema.define(version: 2019_03_22_195704) do
   add_foreign_key "documents", "users"
   add_foreign_key "photos", "documents"
   add_foreign_key "rentals", "users"
-  add_foreign_key "vehicles", "rentals"
   add_foreign_key "verification_sessions", "documents"
   add_foreign_key "verification_sessions", "users"
 end

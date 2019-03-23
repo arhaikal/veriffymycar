@@ -1,3 +1,5 @@
 class Vehicle < ApplicationRecord
-  belongs_to :rental
+  has_many :rental
+  
+  attr_accessor :car
 end

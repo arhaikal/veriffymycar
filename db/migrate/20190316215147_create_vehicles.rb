@@ -6,7 +6,6 @@ class CreateVehicles < ActiveRecord::Migration[5.2]
       t.string :make
       t.string :model
       t.integer :year
-      t.references :rental, foreign_key: true
 
       t.timestamps
     end
