@@ -1,0 +1,7 @@
+<%= form_for @photo, url: { action: "create" },  html: { multipart: true } do |form| %>
+  <%= form.file_field :face %>
+  <%= form.file_field :document_front %>
+  <%= form.file_field :document_back %>
+  <%= form.hidden_field :document_id, value: params[:document_id] %>
+  <%= form.submit %>
+<% end %>

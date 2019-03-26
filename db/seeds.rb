@@ -13,7 +13,25 @@ Vehicle.create([
    model: 'AMG',
    year: 2017 },
 
-   { reg_number: 'PLD345',
+   { reg_number: '881BDR',
+    available_indicator: true,
+    make: 'Honda',
+    model: 'Accord',
+    year: 2007 },
+
+  { reg_number: 'POW431',
+    available_indicator: true,
+    make: 'Fiat',
+    model: 'Panda',
+    year: 2019 },
+
+  { reg_number: 'LKA234',
+    available_indicator: true,
+    make: 'Kia',
+    model: 'Picanto',
+    year: 2015 },
+
+  { reg_number: 'PLD345',
    available_indicator: true,
    make: 'BMW',
    model: '730',

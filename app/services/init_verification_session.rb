@@ -1,8 +1,23 @@
 class InitVerificationSession
-  def initialize(person, document)
-    @person = person 
+  def initialize(person, document, photos)
+    @person   = person 
     @document = document
+    @photos   = photos
   end
+
+  def call 
+    session_id = create_new_verification_session
+
+    if session_id 
+      add_photo_to_session(@photos.face, session_id)
+      add_photo_to_session(@photos.document_back, session_id)
+      add_photo_to_session(@photos.document_front, session_id)
+
+      notify_veriff_for_review(session_id)
+    end 
+  end
+
+  private  
 
   def create_new_verification_session
     api_response = init_session
@@ -16,22 +31,64 @@ class InitVerificationSession
           document_id: @document.id
         )
       end
+
+      return parsed_body["verification"]["id"] 
     end 
+  end
+
+  def add_photo_to_session(photo, session_id)
+    begin
+      HTTParty.post(VeriffBaseApi::API_URL + "sessions/" + session_id + "/media",
+        body: parse_photo(photo),
+        headers: VeriffBaseApi.headers(parse_photo(photo)) 
+      )
+    rescue => e
+      Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+    end
+  end
+
+  def notify_veriff_for_review(session_id)
+    begin 
+      HTTParty.patch(VeriffBaseApi::API_URL + "sessions/" + session_id,
+        body: submit_review_body,
+        headers: VeriffBaseApi.headers(submit_review_body) 
+      )
+    rescue => e
+      Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+    end
 
   end
 
   def init_session
-    HTTParty.post(VeriffBaseApi::API_URL + "sessions",
-      body: verification_body,
-      headers: { 
-        'Content-Type' => 'application/json',
-        'X-AUTH-CLIENT' => VeriffBaseApi::API_KEY,
-        'X-SIGNATURE' => VeriffBaseApi.decode_secret(verification_body)
-      } 
-    )
+    begin 
+      HTTParty.post(VeriffBaseApi::API_URL + "sessions",
+        body: verification_body,
+        headers: VeriffBaseApi.headers(verification_body) 
+      )
+    rescue => e
+      Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+    end
   end
 
-  private 
+  def submit_review_body 
+    {
+      "verification" => {
+        "frontState" =>  "done",
+        "status" => "submitted",
+        "timestamp" => Time.now.iso8601
+      }
+    }.to_json
+  end
+
+  def parse_photo(photo)
+    {
+      "image" => {
+        "context" => photo.name.to_s.gsub(/_/, "-"),
+        "content" => "data:#{photo.content_type};base64,#{Base64.strict_encode64(open(photo.path) { |f| f.read })}",
+        "timestamp" => Time.now.iso8601
+      }
+    }.to_json
+  end
 
   def verification_body
     {
@@ -44,7 +101,7 @@ class InitVerificationSession
         "document" => {
           "number" => @document.number,
           "type" =>  @document.document_type,
-          "country" => @document.country
+          "country" => CS.countries.invert[@document.country].to_s
         },
         "additionalData" => {
           "citizenship" => "EE",

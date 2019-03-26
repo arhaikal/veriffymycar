@@ -5,4 +5,8 @@ Rails.application.routes.draw do
 
   resources :rentals, only: [:show, :create, :update]
   resources :sessions, only: [:create, :destroy]
+  resources :documents
+  resources :photos
+
+  post "/webhooks/receive", to: "webhooks#receive"
 end

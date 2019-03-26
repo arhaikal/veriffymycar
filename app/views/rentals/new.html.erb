@@ -35,6 +35,8 @@
         </div>
       </div>
 
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
       <%= f.submit "Find a Car", class: "btn btn-default btn-primary" %>  
  <% end %>
   </div>
