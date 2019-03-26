@@ -17,7 +17,7 @@ class InitVerificationSession
     end 
   end
 
-  private  
+  private
 
   def create_new_verification_session
     api_response = init_session

@@ -1,9 +1,9 @@
 require 'httparty'
 class VeriffBaseApi
   #constants
-  API_URL = "https://api.veriff.me/v1/".freeze
-  API_KEY = "651b112a-76f7-4a86-a93d-2cc9ace74c1c".freeze
-  API_SECRET = '3c184872-6929-43d9-91d5-9e68468b5aa1'.freeze 
+  API_URL = ENV["VERIFF_API_URL"]
+  API_KEY = ENV["VERIFF_API_KEY"]
+  API_SECRET = ENV["VERIFF_API_SECRET"]
 
   def self.headers(verification_body)
     {
