@@ -5,8 +5,8 @@ class VeriffActions
 
     if session
       status= case request_body["verification"]["code"]
-              when 9001,9151,9161 then 'verified'
-              else 'unverified'
+              when 9001,9151,9161 then VerificationSession::VERIFIED
+              else VerificationSession::NOT_VERIFIED
               end
       session.status = status
       session.save!

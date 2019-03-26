@@ -1,0 +1,15 @@
+
+<h3>Here are your upcoming rentals</h3>
+<div class="row">
+  <% @upcoming_rentals.each do |rental|%>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= Vehicle.find(rental.vehicle_id).make  %></h5>
+        <p class="card-text"> <%= "Your booking is coming up on #{rental.pickup_date} in #{rental.pickup_location} "%></p>
+        <%= link_to('More info', rental_path(rental), class: 'btn btn-info')%>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

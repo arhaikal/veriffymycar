@@ -1,0 +1,19 @@
+<ul class="list-group">
+  <% @documents.each do |document| %>
+    <li class="list-group-item">
+      <%= document.document_type + "-" + document.number %>
+
+      <% if VerificationSession.find_by(document_id: document.id) %>
+        <h5 class="btn btn-success"> <%= VerificationSession.find_by(document_id: document.id).status %> </h5> 
+        <p class="lead">Hold on tight your identity is under review</p>
+
+      <% elsif Photo.find_by(document_id: document.id) %>
+        <h5> <%= link_to "Begin verification proccess", verification_path(document: document), class: "btn btn-primary" %></h5> 
+
+      <% else %>
+        <%= link_to 'Add photos for verification', new_photo_path(document_id: document.id), :class => "btn btn-warning" %>
+      <% end %>
+
+    </li>
+  <% end %>
+</ul>

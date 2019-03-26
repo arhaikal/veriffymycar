@@ -1,26 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="jumbotron">
-      <h1 class="display-4">Your car is ready!</h1>
-      <p class="lead">Please verify yourself to complete your booking</p>
-      <div class="btn btn-primary">
-        <%= link_to 'Add a new document', new_document_path, :class => "btn" %> |
-      </div>
-      <hr class="my-4">
+      <h1 class="display-4">Your <%= @vehicle.make %> is ready!</h1>
 
-      <ul class="list-group">
-         <% @documents.each do |document| %>
-          <li class="list-group-item">
-            <%= document.document_type + "-" + document.number %>
-            <% if Photo.find_by(document_id: document.id) %>
-              <h5> Begin verification </h5> 
-            <% else %>
-              <%= link_to 'Add photos for verification', new_photo_path(document_id: document.id), :class => "btn btn-warning" %>
-            <% end %>
-          </li>
-        
-        <% end %>
-      </ul>
+      <% unless @documents.any? %>
+        <p class="lead">Add a new document to start your verification proccess</p>
+        <div class="btn btn-primary">
+          <%= link_to 'Add a new document', new_document_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+      <hr class="my-4">
+       
+      <% if @state == :verified %> 
+        <%= render 'rentals/verified'%>
+      <% else %>
+        <%= render 'rentals/unverified'%>
+      <% end %>
+
     </div>
   </div>
 </div>

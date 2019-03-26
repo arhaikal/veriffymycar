@@ -1,5 +1,9 @@
 class RentalsController < ApplicationController
   before_action :authenticate_user!
+ 
+  def index
+    @upcoming_rentals = current_user.rentals.where('pickup_date > ?', Date.today)
+  end
 
   def new
     @rental = Rental.new
@@ -17,8 +21,9 @@ class RentalsController < ApplicationController
 
   def show
     @rental = Rental.find(params[:id])
-
+    @vehicle = Vehicle.find(@rental.vehicle_id)
     @documents = current_user.documents.where('valid_from < ? AND valid_until > ?', Date.today, Date.today)
+    @state = StateManagment.new(current_user).check_state
   end
 
   private

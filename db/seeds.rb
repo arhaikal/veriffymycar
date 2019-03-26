@@ -38,3 +38,30 @@ Vehicle.create([
    year: 2014 }
   
 ])
+
+Location.create([
+  {
+    city: "Tallinn",
+    country: "Estonia",
+    name: "Lennujaam"
+  },
+
+  {
+    city: "Riga",
+    country: "Latvia",
+    name: "Bus Station"
+  },
+
+  {
+    city: "Los Angeles",
+    country: "USA",
+    name: "LAX"
+  },
+
+  {
+    city: "Paris",
+    country: "France",
+    name: "Charles De Gaulle Airport"
+  }
+
+])

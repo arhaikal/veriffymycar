@@ -27,6 +27,7 @@ class InitVerificationSession
       VerificationSession.transaction do
         VerificationSession.create(
           id: parsed_body["verification"]["id"],
+          status: VerificationSession::SUBMITTED,
           user_id: @person.id,
           document_id: @document.id
         )
