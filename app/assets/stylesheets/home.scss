@@ -1,0 +1,22 @@
+// Place all the styles related to the sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.heroBan{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  transition: opacity 1s ease-in;
+  background-image: image-url('red-car.jpg');
+  opacity: 1;
+  z-index: -1000;
+}
+
+.new-rental {
+  color: white;
+}

@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="row justify-content-md-center">
-    <%= form_for @rental, url: { action: "create" } do |f| %>
+  <div class="heroBan"></div>
+  <div class="row justify-content-md-center new-rental">
+    <div class="col-md-12 text-center">
+      <h2> Check out all our spring offers </h2>
+    </div>
+  </div>
+  <div class="row justify-content-md-center new-rental">
+    <%= form_for @rental, url: { action: "create" }, html: { id: "rental-form"} do |f| %>
       <div class="row">
       <div class="col-md-6">
         <div class="form-group">
@@ -22,7 +28,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <div class="form-row">
-            <%= f.label "Pick up location" %>
+            <%= f.label "Drop off location" %>
             <%= f.collection_select :dropoff_location, Location.order(:name),:full_location_name, :full_location_name %>
           </div>
         </div>
