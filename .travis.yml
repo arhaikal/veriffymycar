@@ -1,6 +1,8 @@
 addons:
-  postgresql: 10
+  postgresql: '9.4'
 dist: trusty
+env:
+  - DB=postgresql
 language: ruby
 rvm:
   - 2.6.2
