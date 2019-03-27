@@ -1,12 +1,12 @@
 addons:
-  postgresql: 10.3
-before_install:
-  - gem i rubygems-update -v '<3' && update_rubygems
-  - gem install bundler -v 1.17.2
+  postgresql: 10
 dist: trusty
 language: ruby
 rvm:
   - 2.6.2
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rspec
