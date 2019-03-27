@@ -14,7 +14,7 @@ docker installed on your machine
 
 A step by step series of examples that tell you how to get a development env running
 ```
-docker-compose build web bundle exec rspec
+docker-compose build web
 ```
 ```
 docker-compose run web rails db:create db:migrate db:seed
