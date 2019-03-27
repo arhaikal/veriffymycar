@@ -37,5 +37,17 @@ RSpec.describe Document, type: :model do
       subject.number = nil
       expect(subject).to_not be_valid
     end
+
+    it "is not valid with valid until being before valid from" do
+      subject.valid_from = Date.tomorrow.next_week
+      subject.valid_until = Date.tomorrow
+
+      expect(subject).to_not be_valid
+    end
+
+    it "is not valid with valid until being in the past" do
+      subject.valid_until = Date.yesterday
+      expect(subject).to_not be_valid
+    end
   end
 end
