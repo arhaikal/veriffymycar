@@ -30,7 +30,14 @@ FactoryBot.define do
     country {'Latvia'}
     valid_from {'23-12-2019'}
     valid_until {'23-12-2029'}
-    association :user, factory: :user
+    user
+  end
+  
+  factory :verification_session do
+    id {'82c90c22-c8a8-412c-8e0e-f3f27b385071'}
+    status {'submitted'}
+    document
+    user
   end
 
   factory :photo do 

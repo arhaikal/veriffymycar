@@ -41,6 +41,7 @@ group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'factory_bot_rails'
   gem 'ffaker'
+  gem 'webmock'
 end
 
 group :development do
