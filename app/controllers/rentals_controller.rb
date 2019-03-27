@@ -2,7 +2,7 @@ class RentalsController < ApplicationController
   before_action :authenticate_user!
  
   def index
-    @upcoming_rentals = current_user.rentals.where('pickup_date > ?', Date.today)
+    @upcoming_rentals = current_user.rentals.where('pickup_date >= ?', Date.today)
   end
 
   def new
