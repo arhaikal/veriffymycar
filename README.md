@@ -10,7 +10,7 @@ App uses travis ci for continues integration
 ruby '2.6.2'
 docker installed on your machine
 
-Environmental variables needed: 
+Environment variables needed: 
 VERIFF_API_URL = "https://api.veriff.me/v1/"
 VERIFF_API_KEY = API Key
 VERIFF_API_SECRET = API secret
