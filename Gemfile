@@ -33,6 +33,7 @@ gem 'paperclip', '~> 6.0.0'
 gem 'bootstrap', '~> 4.3.1'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'city-state'
+gem 'travis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -41,7 +42,6 @@ group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'factory_bot_rails'
   gem 'ffaker'
-  gem 'webmock'
 end
 
 group :development do

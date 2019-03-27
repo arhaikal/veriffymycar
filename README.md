@@ -1,24 +1,35 @@
-# README
+# Project Title
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Car rental service using veriff for user verification
+(project does not include payment system)
 
-Things you may want to cover:
+### Prerequisites
 
-* Ruby version
+```
+ruby '2.6.2'
+docker installed on your machine
+```
 
-* System dependencies
+### Installing
 
-* Configuration
+A step by step series of examples that tell you how to get a development env running
 
-* Database creation
+docker-compose build web bundle exec rspec
 
-* Database initialization
+```
+docker-compose run web rails db:create db:migrate db:seed
 
-* How to run the test suite
+```
+docker-compose up web
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+visit http://localhost:3000/
 
-* Deployment instructions
+```
 
-* ...
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests localy
+
+docker-compose run web bundle exec rspec
+
