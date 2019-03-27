@@ -1,3 +1,5 @@
+gem 'dotenv-rails', groups: [:development, :test]
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -27,7 +29,6 @@ gem 'bcrypt', '~> 3.1.12'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
-gem 'dotenv-rails'
 gem 'httparty'
 gem 'paperclip', '~> 6.0.0'
 gem 'bootstrap', '~> 4.3.1'
