@@ -3,6 +3,9 @@ addons:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
+before_install:
+  - gem i rubygems-update -v '<3' && update_rubygems
+  - gem install bundler -v 1.17.2
 dist: trusty
 language: ruby
 rvm:
